@@ -1,4 +1,4 @@
-require 'time'
+require 'date'
 
 class Room
 

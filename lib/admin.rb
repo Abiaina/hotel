@@ -1,4 +1,4 @@
-require 'time'
+require 'date'
 require_relative 'room.rb'
 
 class Admin
