@@ -16,9 +16,4 @@ describe 'reservation' do
     test = Reservation.new(date1, date2)
     test.stay_days.must_equal(Date.parse(date2) - Date.parse(date1) - 1)
   end
-
-  it "id instance variable returns the id of the room." do
-    test = Room.new(3)
-    test.id.must_equal 3
-  end
 end
