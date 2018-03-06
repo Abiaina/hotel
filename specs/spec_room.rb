@@ -14,6 +14,6 @@ describe 'room' do
 
   it "id instance variable returns the id of the room." do
     test = Room.new(3)
-    test.id.must_equal 3
+    test.room_id.must_equal 3
   end
 end

@@ -19,7 +19,7 @@ describe 'admin' do
     it "id instance variable returns the id of the room." do
       admin_test = Admin.new
       rooms = admin_test.roomlist
-      rooms[3].id.must_equal 4
+      rooms[3].room_id.must_equal 4
     end
   end
 

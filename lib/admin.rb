@@ -1,6 +1,6 @@
 require 'date'
-require_relative 'room.rb'
-require_relative 'reservation.rb'
+require_relative 'room'
+require_relative 'reservation'
 
 class Admin
   attr_reader :roomlist, :reservations, :price
@@ -10,8 +10,8 @@ class Admin
     @reservations = []
 
     20.times do |i|
-      i += 1
-      @roomlist << Room.new(i)
+
+      @roomlist << Room.new(i + 1)
     end
 
     return @roomlist
@@ -23,7 +23,7 @@ class Admin
   end
 
   def reservation_price (index)
-    @price = @reservation[index].stay_days * room.cost
+    @price = @reservations[index].stay_days * 200
     return price
   end
 end
