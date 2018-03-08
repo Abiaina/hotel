@@ -1,5 +1,4 @@
 require 'date'
-require_relative 'room'
 require_relative 'reservation'
 
 class Admin
@@ -10,7 +9,7 @@ class Admin
     @reservations = []
 
     20.times do |i|
-      @roomlist << Room.new(i + 1)
+      @roomlist << (i + 1)
     end
   end
 
@@ -18,10 +17,13 @@ class Admin
     @reservations << Reservation.new(check_in, check_out, room_id)
   end
 
+# Move to reservation class and update testing for reservation and admin.
+
   def reservation_price(index)
     @price = @reservations[index].stay_days * roomlist[0].cost
     return price
   end
+### There is no room class required now.
 
   def bookings_by_date (date)
     bookings_by_day = []
