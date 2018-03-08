@@ -14,12 +14,6 @@ describe 'admin initialize' do
     @admin_test.roomlist.count.must_equal 20
     @admin_test.roomlist[8].must_be_instance_of Integer
   end
-
-  # Use when room class is deleted.
-  # it "id instance variable returns the id of the room." do
-  #   rooms = @admin_test.roomlist
-  #   rooms[3].room_id.must_equal 4
-  # end
 end
 
 describe 'add_reservation' do
@@ -29,13 +23,19 @@ describe 'add_reservation' do
 
     @admin_test = Admin.new
 
-    @bookings = @admin_test.add_reservation(@date1, @date2, 1)
+    @admin_test.add_reservation(@date1, @date2, 1)
+
+    @bookings = @admin_test.reservations
 
   end
 
   it "reservations returns list of reservation instances" do
     @bookings.must_be_instance_of Array
     @bookings[0].must_be_instance_of Reservation
+  end
+
+  it "can access room id from reservation instance." do
+    @bookings[0].room_id.must_equal 1
   end
 
   it "calculates the length of stay" do
