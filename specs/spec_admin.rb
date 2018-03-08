@@ -75,52 +75,49 @@ describe 'add_reservation' do
 
     admin_test_2.reservations[1].room_id.must_equal 2
   end
-  #
-  #   it "raises error if end date preceeds start date" do
-  #     proc {
-  #       admin_test_date_reverse = Admin.new admin_test_date_reverse.new_reservation(@date2, @date1)
-  #     }.must_raise ArgumentError
-  #   end
-  #
-  #   it "raises error if either start or end start date objects are nil" do
-  #     proc {
-  #       admin_test_date_nil = Admin.new admin_test_date_nil.new_reservation(nil, nil)
-  #     }.must_raise ArgumentError
-  #   end
-  # end
-  #
-  # describe "bookings_by_date" do
-  #
-  #   before do
-  #     booking_dates = [['1-10-2018', '3-5-2018'], ['1-19-2018', '2-5-2018'], ['1-10-2018', '5-5-2018']]
-  #
-  #     @admin_test = Admin.new
-  #
-  #     booking_dates.each do |dates|
-  #       @admin_test.new_reservation(dates[0], dates[1])
-  #     end
-  #   end
-  #
-  #   it "returns an array of reservation instances" do
-  #     bookings_on_test_day = @admin_test.bookings_by_date('1-15-2018')
-  #
-  #     bookings_on_test_day.must_be_instance_of Array
-  #     bookings_on_test_day[0].must_be_instance_of Reservation
-  #   end
-  #
-  #   it "returns an empty array if no reservation dates intersect with booking date argument given" do
-  #     bookings_on_test_day = @admin_test.bookings_by_date('1-15-2019')
-  #
-  #     bookings_on_test_day.count.must_equal 0
-  #   end
-  #
-  #   it "raises an error if booking date is not a valid date" do
-  #     proc {
-  #       @admin_test.bookings_by_date(nil)
-  #     }.must_raise ArgumentError
-  #   end
-  #
-  #   it "bookings_by_date array should not exceed the count of admin's reservations" do
-  #
-  #   end
+
+  describe "bookings_by_date" do
+
+    before do
+      booking_dates = [
+        ['2018-1-10', '2018-3-5'], ['2018-1-19', '2018-5-2'], ['2018-1-10', '2018-5-5']
+      ]
+
+      @admin_test = Admin.new
+
+      booking_dates.each do |dates|
+        @admin_test.add_reservation(dates[0], dates[1], 1)
+      end
+
+      @date1 = '2018-1-15'
+    end
+
+    it "returns an array" do
+      bookings_on_test_day = @admin_test.bookings_by_date(@date1)
+
+      bookings_on_test_day.must_be_instance_of Array
+      bookings_on_test_day[0].must_be_instance_of Reservation
+    end
+
+    it "returns array of reservation instances" do
+      bookings_on_test_day = @admin_test.bookings_by_date(@date1)
+
+      bookings_on_test_day.must_be_instance_of Array
+      bookings_on_test_day[0].must_be_instance_of Reservation
+    end
+
+    it "reservation check_in/check_out date range includes date argument input" do
+      bookings_on_test_day = @admin_test.bookings_by_date(@date1)
+
+      Date.parse(@date1).between?(bookings_on_test_day[1].start_date, bookings_on_test_day[1].end_date).must_equal true
+    end
+
+    it "returns an empty array if no reservation dates intersect with booking date argument given" do
+      bookings_on_test_day = @admin_test.bookings_by_date('2019-1-10')
+
+      bookings_on_test_day.must_be_instance_of Array
+
+      bookings_on_test_day.count.must_equal 0
+    end
+  end
 end
