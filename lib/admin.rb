@@ -10,20 +10,29 @@ class Admin
     @reservations = []
 
     20.times do |i|
-
       @roomlist << Room.new(i + 1)
     end
-
-    return @roomlist
   end
 
-  def new_reservation (alpha, omega)
-    new_stay = Reservation.new(alpha, omega)
-    @reservations << new_stay
+  def add_reservation(reservation)
+    @reservations << reservation
   end
 
-  def reservation_price (index)
-    @price = @reservations[index].stay_days * 200
+  def reservation_price(index)
+    @price = @reservations[index].stay_days * roomlist[0].cost
     return price
+  end
+
+  def bookings_by_date (date)
+    bookings_by_day = []
+
+    date = Date.parse(date)
+
+    @reservations.each do |booking|
+      if date.between?(booking.start_date, booking.end_date)
+        bookings_by_day << booking
+      end
+    end
+    return bookings_by_day
   end
 end

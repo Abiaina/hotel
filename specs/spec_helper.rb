@@ -2,6 +2,8 @@ require 'simplecov'
 SimpleCov.start
 
 require 'time'
+require 'date'
+require 'pry'
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/reporters'
