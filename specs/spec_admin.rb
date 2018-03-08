@@ -129,26 +129,38 @@ describe 'add_reservation' do
 
       @admin_test = Admin.new
 
+      room_id = 1
+
       booking_dates.each do |dates|
-        @admin_test.add_reservation(dates[0], dates[1], 1)
+        @admin_test.add_reservation(dates[0], dates[1], room_id)
+        room_id += 1
       end
     end
 
     it "takes valid checkin/checkout dates returns an array of room ids available for the date range" do
-
+      rooms = @admin_test.available_rooms('2018-1-5', '2018-1-9')
+      rooms.count.must_equal 20
     end
 
     it "rooms are available for new reservation check in on last day of existing reservation" do
-
+      rooms = @admin_test.available_rooms('2018-1-5', '2018-1-10')
+      rooms.count.must_equal 20
     end
 
     it "rooms are available for new reservation checkout on first day of existing reservation" do
-
+      rooms = @admin_test.available_rooms('2018-5-5', '2018-5-10')
+      rooms.count.must_equal 20
     end
 
-    it "rooms are unavailable for new reservation checkout/checks within their existing reservation range." do
-
+    it "returns list of available rooms without reservations dates that coincide with new reservation date range." do
+      rooms = @admin_test.available_rooms('2018-1-21', '2018-2-15')
+      rooms.count.must_equal 17
     end
 
+    it "returns empty array of available rooms if hotel is fully booked during new reservation date range." do
+      rooms = @admin_test.available_rooms('2018-1-21', '2018-2-15')
+      rooms.count.must_equal 0
+      rooms.must_be_instance_of Array
+    end
   end
 end
