@@ -158,8 +158,20 @@ describe 'add_reservation' do
     end
 
     it "returns empty array of available rooms if hotel is fully booked during new reservation date range." do
-      rooms = @admin_test.available_rooms('2018-1-21', '2018-2-15')
+
+      date1 = '2018-1-10'
+      date2 = '2018-3-5'
+
+      full_hotel_test = Admin.new
+
+      20.times do |index|
+        full_hotel_test.add_reservation(date1, date2, index + 1)
+      end
+
+      rooms = full_hotel_test.available_rooms('2018-1-21', '2018-2-15')
+
       rooms.count.must_equal 0
+
       rooms.must_be_instance_of Array
     end
   end

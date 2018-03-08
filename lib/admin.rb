@@ -43,7 +43,7 @@ class Admin
 
       valid_check_out = check_out.between?((reservation.start_date + 1), reservation.end_date)
 
-      if ! valid_check_in && ! valid_check_out
+      if valid_check_in && valid_check_out
         rooms.delete(reservation.room_id)
       end
     end
