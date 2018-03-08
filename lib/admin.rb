@@ -17,14 +17,6 @@ class Admin
     @reservations << Reservation.new(check_in, check_out, room_id)
   end
 
-# Move to reservation class and update testing for reservation and admin.
-
-  def reservation_price(index)
-    @price = @reservations[index].stay_days * roomlist[0].cost
-    return price
-  end
-### There is no room class required now.
-
   def bookings_by_date (date)
     bookings_by_day = []
 
