@@ -14,8 +14,8 @@ class Admin
     end
   end
 
-  def add_reservation(reservation)
-    @reservations << reservation
+  def add_reservation(check_in, check_out, room_id)
+    @reservations << Reservation.new(check_in, check_out, room_id)
   end
 
   def reservation_price(index)

@@ -15,22 +15,21 @@ describe 'admin initialize' do
     @admin_test.roomlist[8].must_be_instance_of Room
   end
 
-  it "id instance variable returns the id of the room." do
-    rooms = @admin_test.roomlist
-    rooms[3].room_id.must_equal 4
-  end
+# Use when room class is deleted.
+  # it "id instance variable returns the id of the room." do
+  #   rooms = @admin_test.roomlist
+  #   rooms[3].room_id.must_equal 4
+  # end
 end
 
-describe 'reservation' do
+describe 'add_reservation' do
   before do
     @date1 = '2018-1-10'
     @date2 = '2018-3-5'
 
     @admin_test = Admin.new
 
-    @rez_test = Reservation.new(@date1, @date2)
-
-    @bookings = @admin_test.add_reservation(@rez_test)
+    @bookings = @admin_test.add_reservation(@date1, @date2, 1)
 
   end
 
@@ -46,14 +45,10 @@ describe 'reservation' do
   it "every new reserservation increases reservations list by one" do
     admin_test_2 = Admin.new
 
-    # to take a snapshot  use .dupe
     bookings_2 = admin_test_2.reservations.count
 
-    rez_test_2 = Reservation.new(@date1, @date2)
+    admin_test_2.add_reservation(@date1, @date2, 1)
 
-    admin_test_2.add_reservation(rez_test_2)
-
-    # Why does the vooking variable increase also? I thought it is set at the
     admin_test_2.reservations.count.must_equal(bookings_2 + 1)
   end
 #
