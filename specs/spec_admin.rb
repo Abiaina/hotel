@@ -120,4 +120,35 @@ describe 'add_reservation' do
       bookings_on_test_day.count.must_equal 0
     end
   end
+
+  describe "available_rooms" do
+    before do
+      booking_dates = [
+        ['2018-1-10', '2018-3-5'], ['2018-1-19', '2018-5-2'], ['2018-1-10', '2018-5-5']
+      ]
+
+      @admin_test = Admin.new
+
+      booking_dates.each do |dates|
+        @admin_test.add_reservation(dates[0], dates[1], 1)
+      end
+    end
+
+    it "takes valid checkin/checkout dates returns an array of room ids available for the date range" do
+
+    end
+
+    it "rooms are available for new reservation check in on last day of existing reservation" do
+
+    end
+
+    it "rooms are available for new reservation checkout on first day of existing reservation" do
+
+    end
+
+    it "rooms are unavailable for new reservation checkout/checks within their existing reservation range." do
+
+    end
+
+  end
 end
