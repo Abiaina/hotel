@@ -61,6 +61,20 @@ describe 'add_reservation' do
 
     admin_test_2.reservations[0].cost.must_equal((Date.parse(@date2).mjd - Date.parse(@date1).mjd) * 200)
   end
+
+  it "gives the room_id of new reservation from reservations array" do
+    admin_test_2 = Admin.new
+
+    bookings_2 = admin_test_2.reservations
+
+    admin_test_2.add_reservation(@date1, @date2, 1)
+
+    admin_test_2.add_reservation(@date1, @date2, 2)
+
+    admin_test_2.add_reservation(@date1, @date2, 2)
+
+    admin_test_2.reservations[1].room_id.must_equal 2
+  end
   #
   #   it "raises error if end date preceeds start date" do
   #     proc {

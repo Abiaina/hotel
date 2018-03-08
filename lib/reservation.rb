@@ -4,7 +4,7 @@ class Reservation
   # Will be an issue for date overlap.
   # CHECKOUT_ADJUSTER = 1
 
-  attr_reader :end_date, :start_date, :stay, :cost
+  attr_reader :end_date, :start_date, :stay, :cost, :room_id
 
   def initialize(start_date, end_date, room_id)
     valid = true
