@@ -14,6 +14,12 @@ class Admin
   end
 
   def add_reservation(check_in, check_out, room_id)
+    available_rooms = available_rooms(check_in, check_out)
+
+    if !available_rooms.include?(room_id)
+      room_id = available_rooms.pop()
+    end
+
     @reservations << Reservation.new(check_in, check_out, room_id)
   end
 
