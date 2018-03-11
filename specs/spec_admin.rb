@@ -100,9 +100,9 @@ describe 'add_reservation' do
   it "assigned room is not assigned again after being reserved" do
     admin_test_2 = Admin.new
 
-    available_rooms = admin_test_2.bookings_by_date(@date1 << 5).dup
-
-    bookings_2 = admin_test_2.reservations
+    20.times do |index|
+      admin_test_2.add_reservation(@date1, @date2, (index + 1))
+    end
 
     proc {
       admin_test_2.add_reservation(@date1 << 5, @date2 << 5, 1)}.must_raise ArgumentError

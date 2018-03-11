@@ -20,6 +20,10 @@ class Admin
       room_id = available_rooms.pop()
     end
 
+    if available_rooms.count == 0
+      raise ArgumentError.new("No available roooms")
+    end
+
     @reservations << Reservation.new(check_in, check_out, room_id)
   end
 
