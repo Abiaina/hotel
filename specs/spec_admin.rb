@@ -71,7 +71,7 @@ describe 'add_reservation' do
 
     admin_test_2.add_reservation(@date1, @date2, 2)
 
-    admin_test_2.add_reservation(@date1, @date2, 2)
+    admin_test_2.add_reservation(@date1, @date2, 3)
 
     admin_test_2.reservations[1].room_id.must_equal 2
   end
@@ -108,14 +108,15 @@ describe 'add_reservation' do
       admin_test_2.add_reservation(@date1 << 5, @date2 << 5, 1)}.must_raise ArgumentError
     end
 
-    it "assigned room is not assigned again after being reserved" do
+    it "raises an error when room is already booked for given date range" do
       admin_test_2 = Admin.new
 
       rez1 = admin_test_2.add_reservation(@date1, @date2, 11)
 
-      rez2 = admin_test_2.add_reservation(@date1, @date2, 11)
+      proc {
+        rez2 = admin_test_2.add_reservation(@date1, @date2, 11)
+      }.must_raise ArgumentError
 
-      rez1[0].room_id.wont_equal (rez2[1].room_id)
     end
 
     describe "bookings_by_date" do

@@ -13,13 +13,15 @@ class Admin
     end
   end
 
-  def add_reservation(check_in, check_out, room_id)
+  def add_reservation(check_in, check_out, room_id, block: 1)
     available_rooms = available_rooms(check_in, check_out)
 
-    # I chose to assign another room (same price) if the desired room is not available
+    if block > 1
+      block_helper
+    end
 
-    if !available_rooms.include?(room_id)
-      room_id = available_rooms.pop()
+    if !(available_rooms.include?(room_id)) 
+      raise ArgumentError.new("#{room_id} is booked for these dates")
     end
 
     if available_rooms.count == 0
