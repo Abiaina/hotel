@@ -97,7 +97,7 @@ describe 'add_reservation' do
 
   end
 
-  it "assigned room is not assigned again after being reserved" do
+  it "no reservations allowed in fully booked hotel" do
     admin_test_2 = Admin.new
 
     20.times do |index|
@@ -108,8 +108,14 @@ describe 'add_reservation' do
       admin_test_2.add_reservation(@date1 << 5, @date2 << 5, 1)}.must_raise ArgumentError
     end
 
-    it "raises error if no availble room for check-in/check-out range" do
+    it "assigned room is not assigned again after being reserved" do
+      admin_test_2 = Admin.new
 
+      rez1 = admin_test_2.add_reservation(@date1, @date2, 11)
+
+      rez2 = admin_test_2.add_reservation(@date1, @date2, 11)
+
+      rez1[0].room_id.wont_equal (rez2[1].room_id)
     end
 
     describe "bookings_by_date" do
