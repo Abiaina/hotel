@@ -1,5 +1,6 @@
 require 'date'
 require_relative 'reservation'
+require_relative 'block_room'
 
 class Admin
   attr_reader :roomlist, :reservations, :price
@@ -20,7 +21,7 @@ class Admin
       block_helper
     end
 
-    if !(available_rooms.include?(room_id)) 
+    if !(available_rooms.include?(room_id))
       raise ArgumentError.new("#{room_id} is booked for these dates")
     end
 
