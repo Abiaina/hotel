@@ -1,8 +1,6 @@
 require 'date'
 
 class Reservation
-  # Will be an issue for date overlap.
-  # CHECKOUT_ADJUSTER = 1
 
   attr_reader :end_date, :start_date, :stay, :cost, :room_id
 
