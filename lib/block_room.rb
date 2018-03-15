@@ -20,11 +20,10 @@ class BlockRoom
   end
 
   def add_reservation(reservation)
-    if @reservations.count >= 5
+    if @reservations.count > 4 || !@blocked_rooms_ids.include?(reservation.room_id)
       raise ArgumentError.new("Room Block")
     else
       @reservations << reservation
-      @blocked_rooms_ids.delete(reservation.room_id)
     end
   end
 end
