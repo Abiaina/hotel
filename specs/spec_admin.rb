@@ -219,75 +219,75 @@ describe 'add_reservation' do
       end
     end
 
-    describe "new_block" do
-      before do
-        @date1 = '2018-1-10'
-        @date2 = '2018-3-5'
-
-        @room_block_ids = [1, 2, 3, 4, 5]
-
-        @rate = 150
-
-        @new_admin = Admin.new
-
-        @new_admin.new_block(@date1, @date2, 5, @rate)
-
-        @test_block = @new_admin.blocks[0]
-      end
-
-    it "makes a new block instance" do
-      @test_block.must_be_instance_of BlockRoom
-    end
-
-    it "stores the new block instance in a hash and assigns it an id (key)" do
-      @new_admin.blocks[0].must_be_instance_of BlockRoom
-    end
-
-    it "rooms assigned to block are not available during block date range" do
-      @new_admin.available_rooms(@date1, @date2).include?(@room_block_ids[0]).must_equal true
-
-      @new_admin.block_add_reservation(@new_admin.blocks[0])
-
-      @new_admin.available_rooms(@date1, @date2).include?(@room_block_ids[0]).must_equal false
-    end
-
-    it "each reservation within the block has the same check_in date" do
-      @new_admin.block_add_reservation(@new_admin.blocks[0])
-
-      @new_admin.block_add_reservation(@new_admin.blocks[0])
-
-      @new_admin.block_add_reservation(@new_admin.blocks[0])
-
-      check_in_1 = @new_admin.blocks[0].reservations[0].start_date
-
-      check_in_2 = @new_admin.blocks[0].reservations[2].start_date
-      check_in_1.must_equal(check_in_2)
-    end
-
-    it "each reservation within the block has the same check_out date" do
-      @new_admin.block_add_reservation(@new_admin.blocks[0])
-
-      @new_admin.block_add_reservation(@new_admin.blocks[0])
-
-      @new_admin.block_add_reservation(@new_admin.blocks[0])
-
-      check_out_1 = @new_admin.blocks[0].reservations[0].end_date
-
-      check_out_2 = @new_admin.blocks[0].reservations[2].end_date
-      check_out_1.must_equal(check_out_2)
-    end
-
-    it "each reservation within the block has the same cost" do
-      @new_admin.block_add_reservation(@new_admin.blocks[0])
-
-      @new_admin.block_add_reservation(@new_admin.blocks[0])
-
-      @new_admin.block_add_reservation(@new_admin.blocks[0])
-
-      cost_1 = @new_admin.blocks[0].reservations[0].cost
-
-      cost_2 = @new_admin.blocks[0].reservations[2].cost
-      cost_1.must_equal(cost_2)
-    end
-  end
+  #   describe "new_block" do
+  #     before do
+  #       @date1 = '2018-1-10'
+  #       @date2 = '2018-3-5'
+  #
+  #       @room_block_ids = [1, 2, 3, 4, 5]
+  #
+  #       @rate = 150
+  #
+  #       @new_admin = Admin.new
+  #
+  #       @new_admin.new_block(@date1, @date2, 5, @rate)
+  #
+  #       @test_block = @new_admin.blocks[0]
+  #     end
+  #
+  #   it "makes a new block instance" do
+  #     @test_block.must_be_instance_of BlockRoom
+  #   end
+  #
+  #   it "stores the new block instance in a hash and assigns it an id (key)" do
+  #     @new_admin.blocks[0].must_be_instance_of BlockRoom
+  #   end
+  #
+  #   it "rooms assigned to block are not available during block date range" do
+  #     @new_admin.available_rooms(@date1, @date2).include?(@room_block_ids[0]).must_equal true
+  #
+  #     @new_admin.block_add_reservation(@new_admin.blocks[0])
+  #
+  #     @new_admin.available_rooms(@date1, @date2).include?(@room_block_ids[0]).must_equal false
+  #   end
+  #
+  #   it "each reservation within the block has the same check_in date" do
+  #     @new_admin.block_add_reservation(@new_admin.blocks[0])
+  #
+  #     @new_admin.block_add_reservation(@new_admin.blocks[0])
+  #
+  #     @new_admin.block_add_reservation(@new_admin.blocks[0])
+  #
+  #     check_in_1 = @new_admin.blocks[0].reservations[0].start_date
+  #
+  #     check_in_2 = @new_admin.blocks[0].reservations[2].start_date
+  #     check_in_1.must_equal(check_in_2)
+  #   end
+  #
+  #   it "each reservation within the block has the same check_out date" do
+  #     @new_admin.block_add_reservation(@new_admin.blocks[0])
+  #
+  #     @new_admin.block_add_reservation(@new_admin.blocks[0])
+  #
+  #     @new_admin.block_add_reservation(@new_admin.blocks[0])
+  #
+  #     check_out_1 = @new_admin.blocks[0].reservations[0].end_date
+  #
+  #     check_out_2 = @new_admin.blocks[0].reservations[2].end_date
+  #     check_out_1.must_equal(check_out_2)
+  #   end
+  #
+  #   it "each reservation within the block has the same cost" do
+  #     @new_admin.block_add_reservation(@new_admin.blocks[0])
+  #
+  #     @new_admin.block_add_reservation(@new_admin.blocks[0])
+  #
+  #     @new_admin.block_add_reservation(@new_admin.blocks[0])
+  #
+  #     cost_1 = @new_admin.blocks[0].reservations[0].cost
+  #
+  #     cost_2 = @new_admin.blocks[0].reservations[2].cost
+  #     cost_1.must_equal(cost_2)
+  #   end
+  # end
 end
