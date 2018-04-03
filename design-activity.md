@@ -50,11 +50,4 @@ Bonus question once you've read Metz ch. 3: Which implementation is more loosely
 Revisiting Hotel Activity
   There are a couple of places where I violate the single responsibility rule for classes.
 
-  I chose to fix the instance method available_rooms in admin that calls methods from the reservation class.
-
-  I will split the method into several methods and put most of the logic into the reservation class.
-
-  Reservation class will take on:
-  -checking if dates are valid
-
-  Admin: will just have a method that calls on that class and repackages the answer to be used in the admin class. almost no logic. Just adding to the array of reservation instances and updating the roomlist
+  I chose to remove the instance variable price in admin and use a local variable to store the block room prices. This did not require any changes to my testing.

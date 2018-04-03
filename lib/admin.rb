@@ -3,7 +3,7 @@ require_relative 'reservation'
 require_relative 'block_room'
 
 class Admin
-  attr_reader :roomlist, :reservations, :price, :blocks
+  attr_reader :roomlist, :reservations, :blocks
 
   def initialize
     @roomlist = []
@@ -33,7 +33,6 @@ class Admin
 
   def available_rooms(check_in, check_out)
 
-    # this logic will be put into the reservation class
     check_in = Date.parse(check_in)
     check_out = Date.parse(check_out)
 
@@ -48,8 +47,6 @@ class Admin
         rooms.delete(reservation.room_id)
       end
     end
-    ## end of logic for reservation class
-    # still update @roomlise and @reservations
     return rooms
   end
 
