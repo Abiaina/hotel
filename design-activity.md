@@ -51,3 +51,5 @@ Revisiting Hotel Activity
   There are a couple of places where I violate the single responsibility rule for classes.
 
   I chose to remove the instance variable price in admin and use a local variable to store the block room prices. This did not require any changes to my testing.
+
+  I also decided to change the block_add_reservation instance method in admin and move the logic and making of new reservation into block_room class. The tests pass still.

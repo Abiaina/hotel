@@ -31,6 +31,7 @@ class Admin
     @reservations << Reservation.new(check_in, check_out, room_id)
   end
 
+
   def available_rooms(check_in, check_out)
 
     check_in = Date.parse(check_in)
@@ -40,6 +41,7 @@ class Admin
 
     @reservations.each do |reservation|
       valid_check_in = check_in.between?(reservation.start_date, (reservation.end_date - 1))
+
 
       valid_check_out = check_out.between?((reservation.start_date + 1), reservation.end_date)
 
@@ -68,10 +70,9 @@ class Admin
     end
   end
 
+  # Modified this method
   def block_add_reservation(block)
-    new_rez = Reservation.new(block.check_in.to_s, block.check_out.to_s, block.blocked_rooms_ids[0])
-
-    block.add_reservation(new_rez)
+    new_rez = block.reserve_block
 
     @reservations << new_rez
   end
